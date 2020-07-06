@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import HeroTable from './components/HeroTable.vue'
+import HeroTable from "./components/HeroTable.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HeroTable,
+    HeroTable
   }
-}
+};
 </script>
 
 <style>
