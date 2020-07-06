@@ -20,11 +20,15 @@
           <dd>{{ this.hero.wisdom }}</dd>
         </div>
       </dl>
-      <input v-model="inputHero" />
-      <button @click="check">決定</button>
-      {{ message }}
-      <button @click="answer">正解表示</button>
-      <div v-if="answerFlg">{{ this.hero.name }} {{ this.hero.kana }}</div>
+      <div>
+        <input v-model="inputHero" />
+        <button @click="check">決定</button>
+        {{ message }}
+      </div>
+      <div>
+        <button @click="answer">正解表示</button>
+        <div v-if="answerFlg">{{ this.hero.name }} {{ this.hero.kana }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -55,11 +59,14 @@ export default {
   methods: {
     changeHero() {
       this.answerFlg = false;
+      this.message = "";
+      this.inputHero = "";
       this.hero = heros.heros[Math.floor(Math.random() * heros.heros.length)];
     },
     check() {
       if (this.inputHero == this.hero.kana) {
         this.message = "正解";
+        this.answerFlg = true;
       } else {
         this.message = "まちがい";
       }
@@ -80,4 +87,15 @@ export default {
 </script>
 
 <style scoped>
+dt {
+  float: left;
+  clear: left;
+  margin-right: 0.5em;
+  width: 120px;
+}
+
+dd {
+  float: left;
+  margin-left: 1em;
+}
 </style>

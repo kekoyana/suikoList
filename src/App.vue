@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <section class="container">
-      <button @click="viewHeros">強者一覧</button>
       <button @click="viewQuiz">クイズ</button>
+      <button @click="viewHeros">強者一覧</button>
       <div class="content">
         <component :is="currentView"></component>
       </div>
@@ -21,7 +21,7 @@ export default {
     Quiz
   },
   data() {
-    return { currentView: "HeroTable" };
+    return { currentView: "Quiz" };
   },
   methods: {
     viewHeros() {
