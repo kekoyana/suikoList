@@ -21,7 +21,10 @@
         </div>
       </dl>
       <div>
-        <input v-model="inputHero" />
+        <input v-model="inputHero" autocomplete="on" list="kanas" />
+        <datalist id="kanas">
+          <option v-for="n in kanas" :key="n">{{n}}</option>
+        </datalist>
         <button @click="check">決定</button>
         {{ message }}
       </div>
@@ -40,6 +43,7 @@ export default {
   name: "Quiz",
   data() {
     return {
+      kanas: heros.heros.map(h => h.kana).sort(),
       hero: null,
       inputHero: "",
       message: "",
