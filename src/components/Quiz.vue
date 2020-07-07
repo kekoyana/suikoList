@@ -100,4 +100,9 @@ dd {
   float: left;
   margin-left: 1em;
 }
+
+input {
+  /* 入力欄にフォーカスが当たっても拡大しない */
+  font-size: 17px;
+}
 </style>
