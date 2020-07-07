@@ -31,16 +31,20 @@
         </div>
       </dl>
       <div>
-        <input v-model="inputHero" autocomplete="on" list="kanas" />
+        <button @click="viewTips">ヒント</button>
+        <button @click="answer">正解表示</button>
+      </div>
+      <div>
+        <input size=16 v-model="inputHero" autocomplete="on" list="kanas" />
         <datalist id="kanas">
           <option v-for="n in kanas" :key="n">{{n}}</option>
         </datalist>
         <button @click="check">決定</button>
+      </div>
+      <div>
         {{ message }}
       </div>
       <div>
-        <button @click="viewTips">ヒント</button>
-        <button @click="answer">正解表示</button>
         <div v-if="answerFlg">{{ this.hero.name }} {{ this.hero.kana }}</div>
       </div>
     </div>
@@ -71,6 +75,7 @@ export default {
       this.hero = heros.heros[Math.floor(Math.random() * heros.heros.length)];
     },
     check() {
+      if (!this.kanas.has(this.inputHero)) return
       if (this.inputHero == this.hero.kana) {
         this.message = "正解";
         this.answerFlg = true;
