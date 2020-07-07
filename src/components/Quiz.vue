@@ -22,6 +22,8 @@
         <div v-if="tips">
           <dt>職業</dt>
           <dd>{{ this.hero.job }}</dd>
+          <dt>所在</dt>
+          <dd>{{ this.hero.place }}</dd>
           <dt>体力</dt>
           <dd>{{ this.hero.body }}</dd>
           <dt>舵</dt>
