@@ -1,6 +1,6 @@
 {
   "name": "水滸伝 天命の誓い List",
   "short_name": "天命List",
-  "start_url": "/index.html",
+  "start_url": "/suikoList/",
   "display": "standalone"
 }
