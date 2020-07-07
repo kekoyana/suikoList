@@ -12,6 +12,8 @@
           <dd>{{ this.hero.courage }}</dd>
         </div>
         <div>
+          <dt>体力</dt>
+          <dd>{{ this.hero.body }}</dd>
           <dt>腕力</dt>
           <dd>{{ this.hero.strength }}</dd>
           <dt>技量</dt>
@@ -20,14 +22,12 @@
           <dd>{{ this.hero.wisdom }}</dd>
         </div>
         <div v-if="tips">
+          <dt>舵</dt>
+          <dd>{{ this.hero.rudder ? "○" : "" }}</dd>
           <dt>職業</dt>
           <dd>{{ this.hero.job }}</dd>
           <dt>所在</dt>
           <dd>{{ this.hero.place }}</dd>
-          <dt>体力</dt>
-          <dd>{{ this.hero.body }}</dd>
-          <dt>舵</dt>
-          <dd>{{ this.hero.rudder ? "○" : "" }}</dd>
         </div>
       </dl>
       <div>
@@ -54,13 +54,12 @@ export default {
   name: "Quiz",
   data() {
     return {
-      kanas: heros.heros.map(h => h.kana).sort(),
+      kanas: new Set(heros.heros.map(h => h.kana).sort()),
       hero: null,
       inputHero: "",
       message: "",
       answerFlg: false,
       tips: false,
-      randCols: ["strength", "dexterity", "wisdom"]
     };
   },
   methods: {
