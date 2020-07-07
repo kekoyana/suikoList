@@ -19,6 +19,14 @@
           <dt>知力</dt>
           <dd>{{ this.hero.wisdom }}</dd>
         </div>
+        <div v-if="tips">
+          <dt>職業</dt>
+          <dd>{{ this.hero.job }}</dd>
+          <dt>体力</dt>
+          <dd>{{ this.hero.body }}</dd>
+          <dt>舵</dt>
+          <dd>{{ this.hero.rudder ? "○" : "" }}</dd>
+        </div>
       </dl>
       <div>
         <input v-model="inputHero" autocomplete="on" list="kanas" />
@@ -29,6 +37,7 @@
         {{ message }}
       </div>
       <div>
+        <button @click="viewTips">ヒント</button>
         <button @click="answer">正解表示</button>
         <div v-if="answerFlg">{{ this.hero.name }} {{ this.hero.kana }}</div>
       </div>
@@ -48,16 +57,8 @@ export default {
       inputHero: "",
       message: "",
       answerFlg: false,
-      randCols: ["strength", "dexterity", "wisdom"],
-      columns: {
-        integrity: "忠義",
-        mercy: "仁愛",
-        courage: "勇気",
-        body: "体力",
-        strength: "腕力",
-        dexterity: "技量",
-        wisdom: "知力"
-      }
+      tips: false,
+      randCols: ["strength", "dexterity", "wisdom"]
     };
   },
   methods: {
@@ -65,6 +66,7 @@ export default {
       this.answerFlg = false;
       this.message = "";
       this.inputHero = "";
+      this.tips = false;
       this.hero = heros.heros[Math.floor(Math.random() * heros.heros.length)];
     },
     check() {
@@ -78,13 +80,8 @@ export default {
     answer() {
       this.answerFlg = true;
     },
-    quiz4() {
-      this.randCols = this.columns.keys
-        .slice()
-        .sort(function() {
-          return Math.random() - 0.5;
-        })
-        .slice(0, 3);
+    viewTips() {
+      this.tips = true;
     }
   }
 };
