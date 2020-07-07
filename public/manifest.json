@@ -1,7 +1,6 @@
 {
   "name": "水滸伝 天命の誓い List",
   "short_name": "天命List",
-  "icons": [],
   "start_url": "/index.html",
-  "display": "standalone",
+  "display": "standalone"
 }
