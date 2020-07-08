@@ -1,8 +1,16 @@
 <template>
   <div id="app">
+    <nav>
+      <ul>
+        <li>
+          <a @click="viewQuiz">クイズ</a>
+        </li>
+        <li>
+          <a @click="viewHeros">強者一覧</a>
+        </li>
+      </ul>
+    </nav>
     <section class="container">
-      <button @click="viewQuiz">クイズ</button>
-      <button @click="viewHeros">強者一覧</button>
       <div class="content">
         <component :is="currentView"></component>
       </div>
@@ -42,5 +50,18 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+nav {
+  text-align: center;
+}
+nav ul {
+  margin: 0;
+  padding: 0;
+}
+nav ul li {
+  list-style: none;
+  display: inline-block;
+  width: 18%;
+  min-width: 90px;
 }
 </style>
