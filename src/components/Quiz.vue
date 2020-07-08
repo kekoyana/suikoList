@@ -28,6 +28,7 @@
         </div>
       </dl>
       <div class="control">
+        score: {{ score }}
         <div>
           <input size="16" v-model="inputHero" autocomplete="on" list="kanas" />
           <datalist id="kanas">
@@ -68,7 +69,8 @@ export default {
       inputHero: "",
       tips: false,
       checked: null,
-      hero: null
+      hero: null,
+      score: 20
     };
   },
   methods: {
@@ -82,13 +84,21 @@ export default {
       // 一覧にないものは表示できない
       if (!this.kanas.has(this.inputHero)) return;
       if (this.checked !== null) return;
-      this.checked = this.inputHero == this.hero.kana;
+
+      if (this.inputHero == this.hero.kana) {
+        this.checked = true;
+        this.score += this.tips ? 3 : 4
+      } else {
+        this.checked = false;
+        this.score -= 2
+      }
       this.addHistory();
     },
     viewTips() {
       this.tips = true;
     },
     pass() {
+      this.score -= 2
       this.addHistory();
       this.questionReset();
     },
