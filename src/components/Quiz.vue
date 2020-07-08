@@ -47,6 +47,9 @@
       <div>
         <div v-if="answerFlg">{{ this.hero.name }} {{ this.hero.kana }}</div>
       </div>
+      <div>
+        <span v-for="history in histories" :key="history">{{ history }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -64,10 +67,14 @@ export default {
       message: "",
       answerFlg: false,
       tips: false,
+      histories: [],
     };
   },
   methods: {
     changeHero() {
+      if (this.hero) {
+        this.histories.push((this.answerFlg ? "○" : "×") + this.hero.name);
+      }
       this.answerFlg = false;
       this.message = "";
       this.inputHero = "";
