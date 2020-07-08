@@ -35,8 +35,8 @@
             <option v-for="n in kanas" :key="n">{{n}}</option>
           </datalist>
           <button @click="check">決定</button>
-          <button @click="viewTips">ヒント</button>
-          <button @click="pass">パス</button>
+          <button @click="viewTips" :disabled="isChecked">ヒント</button>
+          <button @click="pass" :disabled="isChecked">パス</button>
         </div>
         <div>
           <div v-if="checked !== null">
@@ -69,6 +69,7 @@ export default {
       inputHero: "",
       tips: false,
       checked: null,
+      isChecked: false,
       hero: null,
       score: 20
     };
@@ -78,6 +79,7 @@ export default {
       this.inputHero = "";
       this.tips = false;
       this.checked = null;
+      this.isChecked = false;
       this.hero = heros.heros[Math.floor(Math.random() * heros.heros.length)];
     },
     check() {
@@ -85,6 +87,7 @@ export default {
       if (!this.kanas.has(this.inputHero)) return;
       if (this.checked !== null) return;
 
+      this.isChecked = true;
       if (this.inputHero == this.hero.kana) {
         this.checked = true;
         this.score += this.tips ? 3 : 4
