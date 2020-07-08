@@ -9,8 +9,6 @@
           <dd>{{ this.hero.mercy }}</dd>
           <dt>勇気</dt>
           <dd>{{ this.hero.courage }}</dd>
-        </div>
-        <div>
           <dt>体力</dt>
           <dd>{{ this.hero.body }}</dd>
           <dt>腕力</dt>
@@ -19,10 +17,10 @@
           <dd>{{ this.hero.dexterity }}</dd>
           <dt>知力</dt>
           <dd>{{ this.hero.wisdom }}</dd>
-        </div>
-        <div v-if="tips">
           <dt>舵</dt>
           <dd>{{ this.hero.rudder ? "○" : "" }}</dd>
+        </div>
+        <div v-if="tips">
           <dt>職業</dt>
           <dd>{{ this.hero.job }}</dd>
           <dt>所在</dt>
@@ -37,14 +35,14 @@
           </datalist>
           <button @click="check">決定</button>
           <button @click="viewTips">ヒント</button>
-          <button @click="nextQ">パス</button>
+          <button @click="pass">パス</button>
         </div>
         <div>
           <div v-if="checked !== null">
             {{ this.hero.name }} {{ this.hero.kana }}
             <div v-if="checked == true" class="right">正解</div>
             <div v-if="checked == false" class="miss">まちがい</div>
-            <button @click="nextQ">次へ</button>
+            <button @click="questionReset">次へ</button>
           </div>
         </div>
       </div>
@@ -53,7 +51,7 @@
       </div>
     </div>
     <div v-else>
-      <button @click="nextQ">クイズを始める</button>
+      <button @click="questionReset">クイズを始める</button>
     </div>
   </div>
 </template>
@@ -74,7 +72,7 @@ export default {
     };
   },
   methods: {
-    answerReset() {
+    questionReset() {
       this.inputHero = "";
       this.tips = false;
       this.checked = null;
@@ -85,16 +83,20 @@ export default {
       if (!this.kanas.has(this.inputHero)) return;
       if (this.checked !== null) return;
       this.checked = this.inputHero == this.hero.kana;
+      this.addHistory();
     },
     viewTips() {
       this.tips = true;
     },
-    nextQ() {
-      if (this.hero) {
-        this.histories.push((this.checked ? "○" : "×") + this.hero.name);
-      }
-      this.answerReset();
-    }
+    pass() {
+      this.addHistory();
+      this.questionReset();
+    },
+    addHistory() {
+      this.histories.push(
+        (this.checked ? (this.tips ? "○" : "◎") : "×") + this.hero.name
+      );
+    },
   }
 };
 </script>
