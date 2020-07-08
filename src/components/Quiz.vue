@@ -1,6 +1,5 @@
 <template>
   <div class="quiz">
-    <button @click="changeHero">強者変更</button>
     <div v-if="hero">
       <dl>
         <div>
@@ -30,25 +29,31 @@
           <dd>{{ this.hero.place }}</dd>
         </div>
       </dl>
-      <div>
-        <button @click="viewTips">ヒント</button>
+      <div class="control">
+        <div>
+          <input size="16" v-model="inputHero" autocomplete="on" list="kanas" />
+          <datalist id="kanas">
+            <option v-for="n in kanas" :key="n">{{n}}</option>
+          </datalist>
+          <button @click="check">決定</button>
+          <button @click="viewTips">ヒント</button>
+          <button @click="nextQ">パス</button>
+        </div>
+        <div>
+          <div v-if="checked !== null">
+            {{ this.hero.name }} {{ this.hero.kana }}
+            <div v-if="checked == true" class="right">正解</div>
+            <div v-if="checked == false" class="miss">まちがい</div>
+            <button @click="nextQ">次へ</button>
+          </div>
+        </div>
       </div>
-      <div>
-        <input size=16 v-model="inputHero" autocomplete="on" list="kanas" />
-        <datalist id="kanas">
-          <option v-for="n in kanas" :key="n">{{n}}</option>
-        </datalist>
-        <button @click="check">決定</button>
-      </div>
-      <div>
-        {{ message }}
-      </div>
-      <div>
-        <div v-if="answerFlg">{{ this.hero.name }} {{ this.hero.kana }}</div>
-      </div>
-      <div>
+      <div class="history">
         <span v-for="history in histories" :key="history">{{ history }}</span>
       </div>
+    </div>
+    <div v-else>
+      <button @click="nextQ">クイズを始める</button>
     </div>
   </div>
 </template>
@@ -61,36 +66,34 @@ export default {
   data() {
     return {
       kanas: new Set(heros.heros.map(h => h.kana).sort()),
-      hero: null,
-      inputHero: "",
-      message: "",
-      answerFlg: false,
-      tips: false,
       histories: [],
+      inputHero: "",
+      tips: false,
+      checked: null,
+      hero: null
     };
   },
   methods: {
-    changeHero() {
-      if (this.hero) {
-        this.histories.push((this.answerFlg ? "○" : "×") + this.hero.name);
-      }
-      this.answerFlg = false;
-      this.message = "";
+    answerReset() {
       this.inputHero = "";
       this.tips = false;
+      this.checked = null;
       this.hero = heros.heros[Math.floor(Math.random() * heros.heros.length)];
     },
     check() {
-      if (!this.kanas.has(this.inputHero)) return
-      if (this.inputHero == this.hero.kana) {
-        this.message = "正解";
-        this.answerFlg = true;
-      } else {
-        this.message = "まちがい";
-      }
+      // 一覧にないものは表示できない
+      if (!this.kanas.has(this.inputHero)) return;
+      if (this.checked !== null) return;
+      this.checked = this.inputHero == this.hero.kana;
     },
     viewTips() {
       this.tips = true;
+    },
+    nextQ() {
+      if (this.hero) {
+        this.histories.push((this.checked ? "○" : "×") + this.hero.name);
+      }
+      this.answerReset();
     }
   }
 };
@@ -112,5 +115,12 @@ dd {
 input {
   /* 入力欄にフォーカスが当たっても拡大しない */
   font-size: 17px;
+}
+
+.right {
+  color: red;
+}
+.miss {
+  color: gray;
 }
 </style>
