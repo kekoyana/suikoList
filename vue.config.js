@@ -1,4 +1,7 @@
 module.exports = {
-  publicPath: '/suikoList/',
-  outputDir: 'docs'
+  "publicPath": "/suikoList/",
+  "outputDir": "docs",
+  "transpileDependencies": [
+    "vuetify"
+  ]
 }
