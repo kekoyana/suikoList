@@ -90,10 +90,10 @@ export default {
       this.isChecked = true;
       if (this.inputHero == this.hero.kana) {
         this.checked = true;
-        this.score += this.tips ? 3 : 4
+        this.score += this.tips ? 1 : 2;
       } else {
         this.checked = false;
-        this.score -= 2
+        this.score -= 2;
       }
       this.addHistory();
     },
@@ -101,7 +101,7 @@ export default {
       this.tips = true;
     },
     pass() {
-      this.score -= 2
+      this.score -= 2;
       this.addHistory();
       this.questionReset();
     },
@@ -109,7 +109,7 @@ export default {
       this.histories.push(
         (this.checked ? (this.tips ? "○" : "◎") : "×") + this.hero.name
       );
-    },
+    }
   }
 };
 </script>
