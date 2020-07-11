@@ -1,21 +1,15 @@
 <template>
-  <div id="app">
-    <nav>
-      <ul>
-        <li>
-          <a @click="viewQuiz">クイズ</a>
-        </li>
-        <li>
-          <a @click="viewHeros">強者一覧</a>
-        </li>
-      </ul>
-    </nav>
-    <section class="container">
-      <div class="content">
-        <component :is="currentView"></component>
-      </div>
-    </section>
-  </div>
+  <v-app id="app">
+    <v-card>
+      <v-tabs grow>
+        <v-tab @click="viewQuiz">クイズ</v-tab>
+        <v-tab @click="viewHeros">強者一覧</v-tab>
+      </v-tabs>
+    </v-card>
+    <v-main align="top">
+      <component :is="currentView"></component>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
@@ -24,12 +18,12 @@ import Quiz from "./components/Quiz.vue";
 
 export default {
   name: "App",
+  props: {
+    source: String,
+  },
   components: {
     HeroTable,
-    Quiz
-  },
-  data() {
-    return { currentView: "Quiz" };
+    Quiz,
   },
   methods: {
     viewHeros() {
@@ -38,30 +32,16 @@ export default {
     viewQuiz() {
       this.currentView = "Quiz";
     }
-  }
+  },
+  data: () => ({
+    currentView: "Quiz",
+    drawer: null,
+  }),
+  created () {
+    this.$vuetify.theme.dark = true
+  },
 };
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-nav {
-  text-align: center;
-}
-nav ul {
-  margin: 0;
-  padding: 0;
-}
-nav ul li {
-  list-style: none;
-  display: inline-block;
-  width: 18%;
-  min-width: 90px;
-}
 </style>

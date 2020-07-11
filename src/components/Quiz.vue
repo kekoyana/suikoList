@@ -1,58 +1,106 @@
 <template>
   <div class="quiz">
     <div v-if="hero">
-      <dl>
-        <div>
-          <dt>忠義</dt>
-          <dd>{{ this.hero.integrity }}</dd>
-          <dt>仁愛</dt>
-          <dd>{{ this.hero.mercy }}</dd>
-          <dt>勇気</dt>
-          <dd>{{ this.hero.courage }}</dd>
-          <dt>体力</dt>
-          <dd>{{ this.hero.body }}</dd>
-          <dt>腕力</dt>
-          <dd>{{ this.hero.strength }}</dd>
-          <dt>技量</dt>
-          <dd>{{ this.hero.dexterity }}</dd>
-          <dt>知力</dt>
-          <dd>{{ this.hero.wisdom }}</dd>
-          <dt>舵</dt>
-          <dd>{{ this.hero.rudder ? "○" : "" }}</dd>
-        </div>
-        <div v-if="tips">
-          <dt>職業</dt>
-          <dd>{{ this.hero.job }}</dd>
-          <dt>所在</dt>
-          <dd>{{ this.hero.place }}</dd>
-        </div>
-      </dl>
-      <div class="control">
+      <v-container class="control text-center" >
         score: {{ score }}
-        <div>
-          <input size="16" v-model="inputHero" autocomplete="on" list="kanas" />
+        <v-row>
+          <v-text-field solo v-model="inputHero" autocomplete="on" list="kanas" />
           <datalist id="kanas">
             <option v-for="n in kanas" :key="n">{{n}}</option>
           </datalist>
-          <button @click="check">決定</button>
-          <button @click="viewTips" :disabled="isChecked">ヒント</button>
-          <button @click="pass" :disabled="isChecked">パス</button>
-        </div>
+          <v-btn large color="primary" @click="check">決定</v-btn>
+        </v-row>
         <div>
           <div v-if="checked !== null">
             {{ this.hero.name }} {{ this.hero.kana }}
             <div v-if="checked == true" class="right">正解</div>
             <div v-if="checked == false" class="miss">まちがい</div>
-            <button @click="questionReset">次へ</button>
+            <v-btn @click="questionReset">次へ</v-btn>
+          </div>
+          <div v-else>
+            <v-btn @click="pass" :disabled="isChecked">パス</v-btn>
           </div>
         </div>
-      </div>
+      </v-container>
+      <v-card>
+        <v-row>
+          <v-col>
+            <v-list>
+              <v-list-item>
+                <v-list-item-content>忠義</v-list-item-content>
+                <v-list-item-content>{{ this.hero.integrity }}</v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-content>仁愛</v-list-item-content>
+                <v-list-item-content>{{ this.hero.mercy }}</v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-content>勇気</v-list-item-content>
+                <v-list-item-content>{{ this.hero.courage }}</v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-content>舵</v-list-item-content>
+                <v-list-item-content>{{ this.hero.rudder ? "○" : "" }}</v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-col>
+          <v-col>
+            <v-list>
+              <v-list-item>
+                <v-list-item-content>体力</v-list-item-content>
+                <v-list-item-content>{{ this.hero.body }}</v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-content>腕力</v-list-item-content>
+                <v-list-item-content>{{ this.hero.strength }}</v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-content>技量</v-list-item-content>
+                <v-list-item-content>{{ this.hero.dexterity }}</v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-content>知力</v-list-item-content>
+                <v-list-item-content>{{ this.hero.wisdom }}</v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-col>
+        </v-row>
+        <div v-if="tips">
+          <v-row>
+            <v-col>
+              <v-list>
+                <v-list-item>
+                  <v-list-item-content>職業</v-list-item-content>
+                  <v-list-item-content>{{ this.hero.job }}</v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-col>
+            <v-col>
+              <v-list>
+                <v-list-item>
+                  <v-list-item-content>所在</v-list-item-content>
+                  <v-list-item-content>{{ this.hero.place}}</v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-col>
+          </v-row>
+        </div>
+        <div v-else class="text-center">
+          <v-row>
+            <v-col>
+          <v-btn @click="viewTips" :disabled="isChecked">ヒントを表示する</v-btn>
+            </v-col>
+          </v-row>
+        </div>
+      </v-card>
       <div class="history">
         <span v-for="history in histories" :key="history">{{ history }}</span>
       </div>
     </div>
     <div v-else>
-      <button @click="questionReset">クイズを始める</button>
+      <v-col class="text-center">
+        <v-btn large @click="questionReset">クイズを始める</v-btn>
+      </v-col>
     </div>
   </div>
 </template>
@@ -107,7 +155,7 @@ export default {
     },
     addHistory() {
       this.histories.push(
-        (this.checked ? (this.tips ? "○" : "◎") : "×") + this.hero.name
+        (this.checked ? (this.tips ? "⭕️" : "🏆") : "❌") + this.hero.name
       );
     }
   }
