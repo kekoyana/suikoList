@@ -40,7 +40,7 @@
               </v-list-item>
               <v-list-item>
                 <v-list-item-content>舵</v-list-item-content>
-                <v-list-item-content>{{ this.hero.ruv-list-item-titleer ? "○" : "" }}</v-list-item-content>
+                <v-list-item-content>{{ this.hero.rudder ? "○" : "" }}</v-list-item-content>
               </v-list-item>
             </v-list>
           </v-col>
@@ -155,7 +155,7 @@ export default {
     },
     addHistory() {
       this.histories.push(
-        (this.checked ? (this.tips ? "○" : "◎") : "×") + this.hero.name
+        (this.checked ? (this.tips ? "⭕️" : "🏆") : "❌") + this.hero.name
       );
     }
   }
