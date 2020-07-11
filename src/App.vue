@@ -1,16 +1,13 @@
 <template>
-  <v-app id="inspire">
-    <v-tabs centered>
-      <v-tab @click="viewQuiz">クイズ</v-tab>
-      <v-tab @click="viewHeros">強者一覧</v-tab>
-    </v-tabs>
-    <v-main>
-      <v-container
-        class="fill-height"
-        fluid
-      >
-        <component :is="currentView"></component>
-      </v-container>
+  <v-app id="app">
+    <v-card>
+      <v-tabs grow>
+        <v-tab @click="viewQuiz">クイズ</v-tab>
+        <v-tab @click="viewHeros">強者一覧</v-tab>
+      </v-tabs>
+    </v-card>
+    <v-main align="top">
+      <component :is="currentView"></component>
     </v-main>
   </v-app>
 </template>

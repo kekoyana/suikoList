@@ -1,6 +1,8 @@
 <template>
   <div class="hero_table">
-    <vue-good-table :columns="columns" :rows="rows" />
+    <v-container class="text-center">
+      <vue-good-table :columns="columns" :rows="rows" />
+    </v-container>
   </div>
 </template>
 
