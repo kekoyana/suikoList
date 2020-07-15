@@ -1,6 +1,6 @@
 <template>
   <div class="hero_table">
-    <v-container class="text-center">
+    <v-container>
       <vue-good-table :columns="columns" :rows="rows" />
     </v-container>
   </div>
@@ -19,6 +19,7 @@ export default {
     return {
       columns: [
         { label: "名前", field: "name" },
+        { label: "かな", field: "kana" },
         { label: "体力", field: "body", type: "number" },
         { label: "忠義", field: "integrity", type: "number" },
         { label: "仁愛", field: "mercy", type: "number" },
@@ -26,10 +27,18 @@ export default {
         { label: "腕力", field: "strength", type: "number" },
         { label: "技量", field: "dexterity", type: "number" },
         { label: "知力", field: "wisdom", type: "number" },
-        { label: "操舵", field: "rudder", type: "boolean" }
+        { label: "操舵", field: "rudder", formatFn: this.boolFn },
+        { label: "所在", field: "place", type: "number" },
+        { label: "職業", field: "job" },
+        { label: "登場年", field: "appearance", type: "number" },
       ],
-      rows: heros.heros
+      rows: heros.heros,
     };
+  },
+  methods: {
+    boolFn(value) {
+      return value ? "○" : "";
+    }
   }
 };
 </script>
