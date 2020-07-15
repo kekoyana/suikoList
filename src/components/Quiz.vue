@@ -119,7 +119,7 @@ export default {
       checked: null,
       isChecked: false,
       hero: null,
-      score: 20
+      score: 0
     };
   },
   methods: {
