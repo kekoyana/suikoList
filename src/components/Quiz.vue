@@ -1,7 +1,7 @@
 <template>
   <div class="quiz">
     <div v-if="hero">
-      <v-container class="control text-center" >
+      <v-container class="control text-center">
         score: {{ score }}
         <v-row>
           <v-text-field solo v-model="inputHero" autocomplete="on" list="kanas" />
@@ -88,7 +88,7 @@
         <div v-else class="text-center">
           <v-row>
             <v-col>
-          <v-btn @click="viewTips" :disabled="isChecked">ヒントを表示する</v-btn>
+              <v-btn @click="viewTips" :disabled="isChecked">ヒントを表示する</v-btn>
             </v-col>
           </v-row>
         </div>
@@ -107,6 +107,11 @@
 
 <script>
 import heros from "./../heros";
+
+const WIN_SCORE = 2;
+const WIN_SCORE_WITH_HIT = 1;
+const LOSE_SCORE = -2;
+const PASS_SCORE = -2;
 
 export default {
   name: "Quiz",
@@ -138,10 +143,10 @@ export default {
       this.isChecked = true;
       if (this.inputHero == this.hero.kana) {
         this.checked = true;
-        this.score += this.tips ? 1 : 2;
+        this.score += this.tips ? WIN_SCORE_WITH_HIT : WIN_SCORE;
       } else {
         this.checked = false;
-        this.score -= 2;
+        this.score += LOSE_SCORE;
       }
       this.addHistory();
     },
@@ -149,7 +154,7 @@ export default {
       this.tips = true;
     },
     pass() {
-      this.score -= 2;
+      this.score += PASS_SCORE;
       this.addHistory();
       this.questionReset();
     },
