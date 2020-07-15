@@ -27,7 +27,7 @@ export default {
         { label: "腕力", field: "strength", type: "number" },
         { label: "技量", field: "dexterity", type: "number" },
         { label: "知力", field: "wisdom", type: "number" },
-        { label: "操舵", field: "rudder", formatFn: this.boolFn },
+        { label: "操舵", field: "rudder", sortable: false, formatFn: this.boolFn },
         { label: "所在", field: "place", type: "number" },
         { label: "職業", field: "job" },
         { label: "登場年", field: "appearance", type: "number" },
