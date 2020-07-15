@@ -19,11 +19,11 @@ import Quiz from "./components/Quiz.vue";
 export default {
   name: "App",
   props: {
-    source: String,
+    source: String
   },
   components: {
     HeroTable,
-    Quiz,
+    Quiz
   },
   methods: {
     viewHeros() {
@@ -35,11 +35,11 @@ export default {
   },
   data: () => ({
     currentView: "Quiz",
-    drawer: null,
+    drawer: null
   }),
-  created () {
-    this.$vuetify.theme.dark = true
-  },
+  created() {
+    this.$vuetify.theme.dark = true;
+  }
 };
 </script>
 

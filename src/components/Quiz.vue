@@ -99,6 +99,8 @@
     </div>
     <div v-else>
       <v-col class="text-center">
+        <div>水滸伝天命の誓いの強者の能力から</div>
+        <div>どの強者なのかひらがなで答えてください。</div>
         <v-btn large @click="questionReset">クイズを始める</v-btn>
       </v-col>
     </div>
