@@ -27,9 +27,11 @@ export default {
         { label: "腕力", field: "strength", type: "number" },
         { label: "技量", field: "dexterity", type: "number" },
         { label: "知力", field: "wisdom", type: "number" },
-        { label: "操舵", field: "rudder", sortable: false, formatFn: this.boolFn },
+        { label: "操舵", field: "rudder", sortFn: this.boolSortFn, formatFn: this.boolFn },
         { label: "所在", field: "place", type: "number" },
         { label: "職業", field: "job" },
+        { label: "仲間", field: "pride", type: "number" },
+        { label: "口調", field: "tone" },
         { label: "登場年", field: "appearance", type: "number" },
       ],
       rows: heros.heros,
@@ -38,6 +40,9 @@ export default {
   methods: {
     boolFn(value) {
       return value ? "○" : "";
+    },
+    boolSortFn(x) {
+      return x;
     }
   }
 };
