@@ -1,7 +1,16 @@
 <template>
   <div class="hero_table">
     <v-container>
-      <vue-good-table :columns="columns" :rows="rows" />
+      <input class="vgt-input" value="aaa" />
+      <vue-good-table
+        :columns="columns"
+        :rows="rows"
+        :search-options="{
+          enabled: true,
+          skipDiacritics: true,
+          placeholder: '検索a',
+        }"
+      />
     </v-container>
   </div>
 </template>
@@ -27,14 +36,19 @@ export default {
         { label: "腕力", field: "strength", type: "number" },
         { label: "技量", field: "dexterity", type: "number" },
         { label: "知力", field: "wisdom", type: "number" },
-        { label: "操舵", field: "rudder", sortFn: this.boolSortFn, formatFn: this.boolFn },
+        {
+          label: "操舵",
+          field: "rudder",
+          sortFn: this.boolSortFn,
+          formatFn: this.boolFn
+        },
         { label: "所在", field: "place", type: "number" },
         { label: "職業", field: "job" },
         { label: "仲間", field: "pride", type: "number" },
         { label: "口調", field: "tone" },
-        { label: "登場年", field: "appearance", type: "number" },
+        { label: "登場年", field: "appearance", type: "number" }
       ],
-      rows: heros.heros,
+      rows: heros.heros
     };
   },
   methods: {
