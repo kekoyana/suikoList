@@ -1,16 +1,19 @@
 <template>
   <div class="hero_table">
-    <v-container>
-      <input class="vgt-input" value="aaa" />
+    <v-container class="suiko-table">
       <vue-good-table
         :columns="columns"
         :rows="rows"
         :search-options="{
           enabled: true,
           skipDiacritics: true,
-          placeholder: '検索a',
+          placeholder: '検索',
         }"
-      />
+      >
+        <div slot="emptystate">
+          該当の強者は見つかりません
+        </div>
+      </vue-good-table>
     </v-container>
   </div>
 </template>
@@ -63,4 +66,9 @@ export default {
 </script>
 
 <style scoped>
+.suiko-table {
+  background-color: white;
+  color: black;
+
+  }
 </style>
