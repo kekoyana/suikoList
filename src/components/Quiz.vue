@@ -119,14 +119,21 @@ export default {
   name: "Quiz",
   data() {
     return {
-      kanas: new Set(heros.heros.map(h => h.kana).sort()),
+      kanas: new Set(
+        heros.heros
+          .sort(function (a, b) {
+            if (a.kana < b.kana) return -1;
+            if (b.kana <= a.kana) return 1;
+          })
+          .map((h) => this.heroName(h))
+      ),
       histories: [],
       inputHero: "",
       tips: false,
       checked: null,
       isChecked: false,
       hero: null,
-      score: 0
+      score: 0,
     };
   },
   methods: {
@@ -143,7 +150,7 @@ export default {
       if (this.checked !== null) return;
 
       this.isChecked = true;
-      if (this.inputHero == this.hero.kana) {
+      if (this.inputHero == this.heroName(this.hero)) {
         this.checked = true;
         this.score += this.tips ? WIN_SCORE_WITH_HIT : WIN_SCORE;
       } else {
@@ -164,8 +171,11 @@ export default {
       this.histories.push(
         (this.checked ? (this.tips ? "⭕️" : "🏆") : "❌") + this.hero.name
       );
-    }
-  }
+    },
+    heroName(hero) {
+      return `${hero.name}(${hero.kana})`;
+    },
+  },
 };
 </script>
 
