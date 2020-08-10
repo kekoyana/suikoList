@@ -8964,10 +8964,10 @@ vue-eslint-parser@^7.0.0, vue-eslint-parser@~7.1.0:
     esquery "^1.0.1"
     lodash "^4.17.15"
 
-vue-good-table@^2.19.5:
-  version "2.19.5"
-  resolved "https://registry.yarnpkg.com/vue-good-table/-/vue-good-table-2.19.5.tgz#69f6d86c9271d24762abdf6e1eed37641bc4b81d"
-  integrity sha512-NWPBNI9A6WuQn58oevR+U3dPwx9y5xg36gxX1kAjyM9fiJS8CvjjuICutNRnM84rY7rTbT++D5+8X6ZgLOjxxQ==
+vue-good-table@^2.21.0:
+  version "2.21.0"
+  resolved "https://registry.yarnpkg.com/vue-good-table/-/vue-good-table-2.21.0.tgz#78f90ee4e40696b72545e2a198c9398c45f0ba45"
+  integrity sha512-e384AGlmEBG0CfTkZXN/OZe1O58V2mbxQafsKqzVrqvROcMZsa9iSyK11D4YS2JzlJo9mRqsad4/vrV/U/Xbdw==
   dependencies:
     date-fns "^2.0.0-beta.4"
     diacriticless "1.0.1"
@@ -8976,7 +8976,6 @@ vue-good-table@^2.19.5:
     lodash.filter "^4.6.0"
     lodash.foreach "^4.5.0"
     lodash.isequal "^4.5.0"
-    vue-select "^3.1.0"
 
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"
@@ -8993,11 +8992,6 @@ vue-loader@^15.9.2:
     loader-utils "^1.1.0"
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
-
-vue-select@^3.1.0:
-  version "3.10.7"
-  resolved "https://registry.yarnpkg.com/vue-select/-/vue-select-3.10.7.tgz#58d756a7159bf923ce99abf74c5d6309ea998136"
-  integrity sha512-6rvIYBNEp9y0xK/sq2ZzDCxKA2BoVNliyctOeMtzarQzvpLlab7l8zvqr2jhGZOxozp7jd2AvZxpF3Ivems2wQ==
 
 vue-style-loader@^4.1.0, vue-style-loader@^4.1.2:
   version "4.1.2"
