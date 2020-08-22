@@ -107,76 +107,101 @@
   </div>
 </template>
 
-<script>
-import heros from "./../heros";
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import Heros from "./../heros";
 
 const WIN_SCORE = 2;
 const WIN_SCORE_WITH_HIT = 1;
 const LOSE_SCORE = -2;
 const PASS_SCORE = -2;
 
-export default {
-  name: "Quiz",
-  data() {
-    return {
-      kanas: new Set(
-        heros.heros
-          .sort(function (a, b) {
-            if (a.kana < b.kana) return -1;
-            if (b.kana <= a.kana) return 1;
-          })
-          .map((h) => this.heroName(h))
-      ),
-      histories: [],
-      inputHero: "",
-      tips: false,
-      checked: null,
-      isChecked: false,
-      hero: null,
-      score: 0,
-    };
-  },
-  methods: {
-    questionReset() {
-      this.inputHero = "";
-      this.tips = false;
-      this.checked = null;
-      this.isChecked = false;
-      this.hero = heros.heros[Math.floor(Math.random() * heros.heros.length)];
-    },
-    check() {
-      // 一覧にないものは表示できない
-      if (!this.kanas.has(this.inputHero)) return;
-      if (this.checked !== null) return;
+interface Hero {
+  id: number;
+  name: string;
+  kana: string;
+  birth: number;
+  group: string;
+  place: number;
+  body: number;
+  integrity: number;
+  mercy: number;
+  courage: number;
+  strength: number;
+  dexterity: number;
+  wisdom: number;
+  pride: number;
+  tone: string;
+  gender: string;
+  job: string;
+  rudder: boolean;
+  appearance: number;
+}
 
-      this.isChecked = true;
-      if (this.inputHero == this.heroName(this.hero)) {
-        this.checked = true;
-        this.score += this.tips ? WIN_SCORE_WITH_HIT : WIN_SCORE;
-      } else {
-        this.checked = false;
-        this.score += LOSE_SCORE;
-      }
-      this.addHistory();
-    },
-    viewTips() {
-      this.tips = true;
-    },
-    pass() {
-      this.score += PASS_SCORE;
-      this.addHistory();
-      this.questionReset();
-    },
-    addHistory() {
-      this.histories.push(
-        (this.checked ? (this.tips ? "⭕️" : "🏆") : "❌") + this.hero.name
-      );
-    },
-    heroName(hero) {
-      return `${hero.name}(${hero.kana})`;
-    },
-  },
-};
+//@Component({
+//  components: {
+//    Heros
+//  }
+//})
+@Component({})
+export default class Quiz extends Vue{
+  inputHero: string = "";
+  tips: boolean = false;
+  checked: boolean | null = null;
+  isChecked: boolean = false;
+  score: number = 0;
+  hero: Hero | null = null;
+  kanas: Set<string> = new Set(
+    Heros.heros
+      .sort(function (a, b): number {
+        if (a.kana < b.kana) return -1;
+        if (b.kana <= a.kana) return 1;
+        return 0;
+      })
+      .map((h) => this.heroName(h))
+  );
+  histories: any = [];
+  questionReset() {
+    this.inputHero = "";
+    this.tips = false;
+    this.checked = null;
+    this.isChecked = false;
+    this.hero = Heros.heros[Math.floor(Math.random() * Heros.heros.length)];
+  }
+  check() {
+    // 一覧にないものは表示できない
+    if (!this.kanas.has(this.inputHero)) return;
+    if (this.checked !== null) return;
+    if (this.hero == null) return;
+
+    this.isChecked = true;
+    if (this.inputHero == this.heroName(this.hero)) {
+      this.checked = true;
+      this.score += this.tips ? WIN_SCORE_WITH_HIT : WIN_SCORE;
+    } else {
+      this.checked = false;
+      this.score += LOSE_SCORE;
+    }
+    this.addHistory();
+  }
+  viewTips() {
+    this.tips = true;
+  }
+  pass() {
+    this.score += PASS_SCORE;
+    this.addHistory();
+    this.questionReset();
+  }
+  addHistory() {
+    if (this.hero == null) return;
+    this.histories.push(
+      (this.checked ? (this.tips ? "⭕️" : "🏆") : "❌") + this.hero.name
+    );
+  }
+  heroName(hero: Hero): string {
+    return `${hero.name}(${hero.kana})`;
+  }
+}
 </script>
 
 <style scoped>
