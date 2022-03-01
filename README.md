@@ -1,24 +1,25 @@
-# suikolist
+水滸伝天命の誓いの強者一覧ページや能力から強者を当てるクイズなど作ってます。
+Vueの練習用。
 
-## Project setup
+### セットアップ
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+### サーバー起動
 ```
 yarn serve
 ```
 
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
+### Lint
 ```
 yarn lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## GitHub Pagesへの反映
+1. 以下を実行し、docsを更新
+```
+yarn build
+```
+
+2. PUSH
